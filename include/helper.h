@@ -32,11 +32,14 @@ std::string flatten(const std::vector<T> &data)
 {
     std::ostringstream sout;
     sout << "[";
-    for (std::vector<T>::const_iterator i = data.cbegin(); i != data.cend() - 1; ++i) 
+    for (int i = 0; i < data.size(); i++)     
     {
-        sout << *i << ", ";
+        sout << data[i];
+        if (i != data.size() - 1) {
+            sout << ", ";
+        }
     }
-    sout << *(data.cend() - 1) << "]";
+    sout << "]";
     return sout.str();
 }
 
@@ -45,11 +48,15 @@ std::string flatten(const std::vector<std::vector<T>> &matrix)
 {
     std::ostringstream sout;
     sout << "[" << std::endl;
-    for (std::vector<std::vector<T>>::const_iterator i = matrix.cbegin(); i != matrix.cend() - 1; ++i) 
-    {
-        sout << "\t" << flatten(*i) << ", " << endl;
+    for (int i = 0; i < matrix.size(); i++) 
+    {        
+        sout << "\t" << flatten(matrix[i]);
+        if (i != matrix.size() - 1) {
+            sout << ", ";
+        }
+        sout << endl;
     }
-    sout << "\t" << *(matrix.cend() - 1) << endl << "]";
+    sout << "]";
     return sout.str();
 }
 
